@@ -27,6 +27,6 @@ export class BooksScene extends Component {
     return <HebrewTitle text={book.heTitle} onPress={this._handleRowPress.bind(this, book)} />;
   }
   _handleRowPress (book) {
-    return this.props.navigator.push({id: 'ParshahsScreen', passProps: {parshahs: book.parshahs}});
+    return this.props.navigator.push({id: 'ParshahsScene', passProps: {parshahs: book.parshahs}});
   }
 }
