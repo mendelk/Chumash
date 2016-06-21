@@ -4,6 +4,7 @@ import {
   Text,
   ListView
 } from 'react-native';
+import { getParshah, expandRef } from './data/helpers'
 import { Verse } from './Verse'
 
 const ALIYA_SECTION_HEADERS = ["One", "Two", "Three", "Four", "Five", "Six", "Seven"];
@@ -12,25 +13,30 @@ const ROW_IDENTITY_SPLITTER = ":";
 export class ParshahScene extends Component {
   constructor (props) {
     super(props);
-    let ds = new ListView.DataSource({
-      getRowData: (props, sectionIdentity, rowIdentity) => {
-        [aliyaIndex, verseIndex] = rowIdentity.split(ROW_IDENTITY_SPLITTER);
-        return props.aliyos[aliyaIndex][verseIndex];
-      },
-      getSectionHeaderData: (props, sectionIdentity) => ALIYA_SECTION_HEADERS[sectionIdentity],
-      rowHasChanged: (r1, r2) => r1 !== r2,
-      sectionHeaderHasChanged: (s1, s2) => s1 !== s2
-    });
-    let sectionIdentities = [0,1,2,3,4,5,6];
-    let rowIdentities = [];
-    sectionIdentities.forEach((sectionIdentity, index) => {
-      rowIdentities[index] = [];
-      props.aliyos[index].forEach((verse, verseIndex) => {
-        rowIdentities[index].push(`${index}${ROW_IDENTITY_SPLITTER}${verseIndex}`)
+    let parshah = getParshah(props);
+    let sectionIDs = [];
+    let rowIDs = [];
+    parshah.aliyaRefs.forEach((ref, index) => {
+      sectionIDs.push(index);
+      rowIDs[index] = [];
+      expandRef({ref: ref, book: props.book}).forEach((verseRef, verseIndex) => {
+        // verse is the "human" verse index within it's Chapter
+        // verseIndex is the index of the verse within it's Aliya
+        let [chapter, verse] = verseRef;
+        rowIDs[index].push(`${chapter-1}${ROW_IDENTITY_SPLITTER}${verse-1}`)
       });
     });
+    let ds = new ListView.DataSource({
+      getRowData: (props, sectionID, rowID) => {
+        let [chapter, verse] = rowID.split(ROW_IDENTITY_SPLITTER);
+        return {book: props.book, chapter: chapter, verse: verse};
+      },
+      getSectionHeaderData: (props, sectionID) => ALIYA_SECTION_HEADERS[sectionID],
+      rowHasChanged: (r1, r2) => false,
+      sectionHeaderHasChanged: (s1, s2) => false
+    });
     this.state = {
-      dataSource: ds.cloneWithRowsAndSections(props, sectionIdentities, rowIdentities)
+      dataSource: ds.cloneWithRowsAndSections(props, sectionIDs, rowIDs)
     }
   }
   render () {
@@ -45,13 +51,9 @@ export class ParshahScene extends Component {
     );
   }
   _renderRow (verse) {
-    return <Verse text={verse} />;
+    return <Verse {...verse} />;
   }
   _renderSectionHeader (title) {
-    return (
-      <View>
-        <Text>{title}</Text>
-      </View>      
-    );
+    return <Text>{title}</Text>;
   }
 }

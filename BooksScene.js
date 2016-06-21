@@ -3,14 +3,16 @@ import {
   View,
   ListView
 } from 'react-native';
+import { getBooks } from './data/helpers'
 import { HebrewTitle } from './HebrewTitle'
 
 export class BooksScene extends Component {
   constructor (props) {
     super(props);
-    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.heTitle !== r2.heTitle});
+    let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.title !== r2.title});
+    let books = getBooks();
     this.state = {
-      dataSource: ds.cloneWithRows(props.books)
+      dataSource: ds.cloneWithRows(books)
     }
   }
   render () {
@@ -24,9 +26,9 @@ export class BooksScene extends Component {
     );
   }
   _renderRow (book) {
-    return <HebrewTitle text={book.heTitle} onPress={this._handleRowPress.bind(this, book)} />;
+    return <HebrewTitle text={book.title} onPress={this._handleRowPress.bind(this, book)} />;
   }
   _handleRowPress (book) {
-    return this.props.navigator.push({id: 'ParshahsScene', passProps: {parshahs: book.parshahs}});
+    return this.props.navigator.push({id: 'ParshahsScene', passProps: { book: book.index }});
   }
 }

@@ -12,7 +12,6 @@ import {
   Navigator,
   BackAndroid
 } from 'react-native';
-import { data } from './data'
 import { BooksScene } from './BooksScene';
 import { ParshahsScene } from './ParshahsScene';
 import { ParshahScene } from './ParshahScene';
@@ -32,7 +31,7 @@ class Chumash extends Component {
     return (
       <Navigator  
         ref={(nav) => { navigator = nav; }}
-        initialRoute={{id: 'BooksScene', passProps: {books: data}}}
+        initialRoute={{id: 'BooksScene', passProps: {}}}
         renderScene={this.renderScene.bind(this)}
         configureScene={() => Navigator.SceneConfigs.FloatFromLeft}
       />

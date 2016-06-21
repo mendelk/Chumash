@@ -4,8 +4,8 @@ import {
   Text
 } from 'react-native';
 
-export function HebrewTitle (props) {
-  return <Text onPress={props.onPress} style={styles.title}>{props.text}</Text>;
+export function HebrewTitle ({ onPress, text}) {
+  return <Text onPress={onPress} style={styles.title}>{text}</Text>;
 }
 
 const styles = StyleSheet.create({
