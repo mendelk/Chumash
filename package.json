@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "getData": "curl \"https://rawgit.com/Sefaria/Sefaria-Export/master/schemas/{Genesis,Exodus,Leviticus,Numbers,Deuteronomy}.json\" --create-dirs -o \"data/schemas/#1.json\" && curl \"https://rawgit.com/Sefaria/Sefaria-Export/master/json/Tanach/Torah/{Genesis,Exodus,Leviticus,Numbers,Deuteronomy}/{Hebrew,English}/merged.json\" --create-dirs -o \"data/text/#1_#2.json\" && curl \"https://rawgit.com/Sefaria/Sefaria-Export/master/json/Commentary/Tanach/Rashi/Rashi%20on%20{Genesis,Exodus,Leviticus,Numbers,Deuteronomy}/{Hebrew,English}/merged.json\" --create-dirs -o \"data/text/Rashi_On_#1_#2.json\""
+    "getData": "curl \"https://rawgit.com/Sefaria/Sefaria-Export/master/schemas/{Genesis,Exodus,Leviticus,Numbers,Deuteronomy}.json\" --create-dirs -o \"data/schemas/#1.json\" && curl \"https://rawgit.com/Sefaria/Sefaria-Export/master/json/Tanakh/Torah/{Genesis,Exodus,Leviticus,Numbers,Deuteronomy}/{Hebrew,English}/merged.json\" --create-dirs -o \"data/text/#1_#2.json\" && curl \"https://rawgit.com/Sefaria/Sefaria-Export/master/json/Commentary/Tanakh/Rashi/Rashi%20on%20{Genesis,Exodus,Leviticus,Numbers,Deuteronomy}/{Hebrew,English}/merged.json\" --create-dirs -o \"data/text/Rashi_On_#1_#2.json\""
   },
   "dependencies": {
     "react": "^15.1.0",
