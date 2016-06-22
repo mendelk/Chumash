@@ -3,8 +3,8 @@ import {
   View,
   ListView
 } from 'react-native';
-import { getBooks } from './data/helpers'
-import { HebrewTitle } from './HebrewTitle'
+import { getBooks } from './../data/helpers'
+import { HebrewTitle } from './../components/HebrewTitle'
 
 export class BooksScene extends Component {
   constructor (props) {

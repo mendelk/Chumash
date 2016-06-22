@@ -22,10 +22,18 @@ export const TEXTS_EN = [
   require("./text/Deuteronomy_English")
 ];
 
-const REFS_RE = /[0-9]+/g;
+export const RASHI_HE = [
+  require("./text/Rashi_On_Genesis_Hebrew"),
+  require("./text/Rashi_On_Exodus_Hebrew"),
+  require("./text/Rashi_On_Leviticus_Hebrew"),
+  require("./text/Rashi_On_Numbers_Hebrew"),
+  require("./text/Rashi_On_Deuteronomy_Hebrew")
+];
 
-export function convertRef(refs) {
-  let [a,b,c,d] = refs.match(REFS_RE).map((n) => parseInt(n));
-  // If ends in same chapter, `toChapter` is omitted
-  return d ? [[a,b],[c,d]] : [[a,b],[a,c]];
-}
+export const RASHI_EN = [
+  require("./text/Rashi_On_Genesis_English"),
+  require("./text/Rashi_On_Exodus_English"),
+  require("./text/Rashi_On_Leviticus_English"),
+  require("./text/Rashi_On_Numbers_English"),
+  require("./text/Rashi_On_Deuteronomy_English")
+];

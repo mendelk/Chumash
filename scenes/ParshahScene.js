@@ -4,8 +4,8 @@ import {
   Text,
   ListView
 } from 'react-native';
-import { getParshah, expandRef } from './data/helpers'
-import { Verse } from './Verse'
+import { getParshah, expandRef } from './../data/helpers'
+import { Verse } from './../components/Verse'
 
 const ALIYA_SECTION_HEADERS = ["One", "Two", "Three", "Four", "Five", "Six", "Seven"];
 const ROW_IDENTITY_SPLITTER = ":";
@@ -29,7 +29,7 @@ export class ParshahScene extends Component {
     let ds = new ListView.DataSource({
       getRowData: (props, sectionID, rowID) => {
         let [chapter, verse] = rowID.split(ROW_IDENTITY_SPLITTER);
-        return {book: props.book, chapter: chapter, verse: verse};
+        return {book: props.book, chapter: parseInt(chapter), verse: parseInt(verse)};
       },
       getSectionHeaderData: (props, sectionID) => ALIYA_SECTION_HEADERS[sectionID],
       rowHasChanged: (r1, r2) => false,
@@ -51,9 +51,12 @@ export class ParshahScene extends Component {
     );
   }
   _renderRow (verse) {
-    return <Verse {...verse} />;
+    return <Verse onPress={this._handleVersePress.bind(this, verse)} {...verse} />;
   }
   _renderSectionHeader (title) {
     return <Text>{title}</Text>;
+  }
+  _handleVersePress (verse) {
+    return this.props.navigator.push({id: 'VerseScene', passProps: verse});
   }
 }

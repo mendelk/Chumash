@@ -12,9 +12,10 @@ import {
   Navigator,
   BackAndroid
 } from 'react-native';
-import { BooksScene } from './BooksScene';
-import { ParshahsScene } from './ParshahsScene';
-import { ParshahScene } from './ParshahScene';
+import { BooksScene } from './scenes/BooksScene';
+import { ParshahsScene } from './scenes/ParshahsScene';
+import { ParshahScene } from './scenes/ParshahScene';
+import { VerseScene } from './scenes/VerseScene';
 
 var navigator; 
 
@@ -47,6 +48,9 @@ class Chumash extends Component {
     }
     if (routeId === 'ParshahScene') {
       return <ParshahScene navigator={navigator} {...route.passProps} />;
+    }
+    if (routeId === 'VerseScene') {
+      return <VerseScene navigator={navigator} {...route.passProps} />;
     }
 
   }

@@ -3,8 +3,8 @@ import {
   View,
   ListView
 } from 'react-native';
-import { getParshahs } from './data/helpers'
-import { HebrewTitle } from './HebrewTitle'
+import { getParshahs } from './../data/helpers'
+import { HebrewTitle } from './../components/HebrewTitle'
 
 export class ParshahsScene extends Component {
   constructor (props) {

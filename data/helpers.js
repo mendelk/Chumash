@@ -2,7 +2,8 @@ import {
   SCHEMAS,
   TEXTS_HE,
   TEXTS_EN,
-  convertRef
+  RASHI_HE,
+  RASHI_EN
 } from './index';
 
 export function getBook({ book }) {
@@ -49,6 +50,14 @@ export function getVerse({ book, chapter, verse, lang }){
   };
 }
 
+const REFS_RE = /[0-9]+/g;
+
+function convertRef(refs) {
+  let [a,b,c,d] = refs.match(REFS_RE).map((n) => parseInt(n));
+  // If ends in same chapter, `toChapter` is omitted
+  return d ? [[a,b],[c,d]] : [[a,b],[a,c]];
+}
+
 function _expandRef(ref, chapter, fromVerse, toVerse) {
   for (let i = fromVerse; i <= toVerse; i++) {
     ref.push([chapter, i]);
@@ -82,11 +91,25 @@ export function expandRef({ book, ref }) {
   return expandedRef;
 }
 
-export function getRashi({ book, chapter, verse, lang }){
-  let source = lang === "en" ? TEXTS_EN : TEXTS_HE;
-  return {
-    text: source[book].text[chapter][verse]
-  };
+
+const RASHI_TITLE_RE = /(<b>(.*)<\/b>)(.*)/;
+
+export function getRashi({ book, chapter, verse, rashi, lang }) {
+  let source = lang === "en" ? RASHI_EN : RASHI_HE;
+  let text = source[book].text[chapter][verse][rashi];
+  let content;
+  if (lang === "he") {
+    [,,title, text] = RASHI_TITLE_RE.exec(text);
+  }
+  return { title, text };
+}
+
+export function getRashisLength({ book, chapter, verse }) {
+  return RASHI_HE[book].text[chapter][verse].length;
+}
+
+export function hasRashis(args){
+  return !!getRashisLength(args);
 }
 
 
