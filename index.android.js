@@ -7,8 +7,6 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  StyleSheet,
-  View,
   Navigator,
   BackAndroid
 } from 'react-native';
@@ -55,14 +53,5 @@ class Chumash extends Component {
 
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  }
-});
 
 AppRegistry.registerComponent('Chumash', () => Chumash);
