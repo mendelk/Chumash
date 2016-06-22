@@ -4,7 +4,7 @@ import {
   Text,
   ListView
 } from 'react-native';
-import { getParshah, expandRef } from './../data/helpers'
+import { getParshah, expandRef, hasRashis } from './../data/helpers'
 import { Verse } from './../components/Verse'
 
 const ALIYA_SECTION_HEADERS = ["One", "Two", "Three", "Four", "Five", "Six", "Seven"];
@@ -57,6 +57,6 @@ export class ParshahScene extends Component {
     return <Text>{title}</Text>;
   }
   _handleVersePress (verse) {
-    return this.props.navigator.push({id: 'VerseScene', passProps: verse});
+    return hasRashis(verse) && this.props.navigator.push({id: 'VerseScene', passProps: verse});
   }
 }
