@@ -1,5 +1,6 @@
 # Task List
 
+- [ ] Nav Bar
 - [ ] English translations
 - [ ] "Go to todays portion"
 - [ ] Implement Material Design?
