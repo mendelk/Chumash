@@ -1,6 +1,6 @@
 # Task List
 
-- [ ] Nav Bar
+- [ ] Nav Bar + Change to NavigatorExperimental
 - [ ] English translations
 - [ ] "Go to todays portion"
 - [ ] Implement Material Design?
